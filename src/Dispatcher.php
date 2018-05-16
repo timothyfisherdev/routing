@@ -127,7 +127,7 @@ class Dispatcher implements ResponseAware
 	{
 		$routePattern = '/' . trim($route->getPattern(), '/');
 
-		if ($routePattern === '*' || $requestedUrl === $routePattern) {
+		if ($routePattern === '/*' || $requestedUrl === $routePattern) {
 			return true;
 		}
 

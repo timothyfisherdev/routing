@@ -20,7 +20,7 @@ class DispatcherTest extends TestCase
 		return [
 			[[
 				new Route(['GET'], '/user/{name}/{id:\d+}', 'handler1'),
-				new Route(['HEAD'], '/foofoo', 'handlerFoo'),
+				new Route(['GET'], '/foofoo', 'handlerFoo'),
 				new Route(['GET'], '/user/{id:\d+}', 'handler2'),
 				new Route(['GET', 'POST'], '/user/{name}', 'handler3')
 			]]
@@ -76,6 +76,19 @@ class DispatcherTest extends TestCase
 	}
 
 	/**
+	 * Test dispatching a static route (doesn't go through regex matching).
+	 *
+	 * @dataProvider routesProvider
+	 */
+	public function testDispatchStaticRoute(array $routes)
+	{
+		$dispatcher = new Dispatcher(...$routes);
+		$response = $dispatcher->dispatch('GET', '/foofoo');
+
+		$this->assertEquals(1, $response->getStatus());
+	}
+
+	/**
 	 * Test that when we dispatch a HEAD request that we end up
 	 * falling back to a GET request if no HEAD route was defined.
 	 * 
@@ -121,6 +134,18 @@ class DispatcherTest extends TestCase
 		$dispatcher = new Dispatcher(...$routes);
 		$response = $dispatcher->dispatch('GET', '/foo');
 		$route = $response->getRoute();
+
+		$this->assertEquals(1, $response->getStatus());
+	}
+
+	/**
+	 * Test dispatching against a route that matches everything.
+	 */
+	public function testDispatchWildcardOnly()
+	{
+		$routes = [new Route(['GET'], '*', 'handler1')];
+		$dispatcher = new Dispatcher(...$routes);
+		$response = $dispatcher->dispatch('GET', 'foo');
 
 		$this->assertEquals(1, $response->getStatus());
 	}
