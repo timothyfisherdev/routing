@@ -1,0 +1,35 @@
+{
+	"name": "timothyfisherdev/routing",
+	"type": "library",
+	"description": "A very simple regular expression based routing library for PHP.",
+	"keywords": ["routing", "router", "dispatcher", "regular expression based router"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Timothy Fisher"
+		}
+	],
+	"require": {
+		"php": ">=7.1.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^7.1"
+	},
+	"autoload": {
+		"psr-4": {
+			"Routing\\": "src/"
+		},
+		"exclude-from-classmap": [
+			"/tests/"
+		],
+		"files": ["src/functions.php"]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Routing\\Test\\": "tests/"
+		}
+	},
+	"scripts": {
+		"test": "phpunit"
+	}
+}
