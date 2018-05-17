@@ -82,7 +82,7 @@ The response object will contain:
 
 These results can be retrieved with `Routing\Response::getStatus()`, `Routing\Response::getRoute()`, and `Routing\Response::getAllowedMethods()` respectively.
 
-> **Note** the handler is stored in the Route object, and can be retrieved with: `phpRouting\Response::getRoute()->getHandler();`
+> **Note** the handler is stored in the Route object, and can be retrieved with: `Routing\Response::getRoute()->getHandler();`
 
 The matched route object is also populated with any parameters and handler for the matched URL. The API for the route object is as follows:
 
